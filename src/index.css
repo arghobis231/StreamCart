@@ -1,0 +1,494 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #09090b;
+    color: #f4f4f5;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* Smooth, natural transitions across UI surfaces and interactive elements */
+html, body, aside, header, main, nav, section, article, div, button, input, select, textarea {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Exclude active video monitors, canvases, and animations to preserve 60fps performance */
+video, canvas, iframe, [class*="animate-"], .preserve-dark * {
+  transition-property: none;
+}
+
+/* ==========================================================================
+   STREAMCART NATURAL LIGHT THEME
+   Soft, cohesive, modern SaaS interface with gentle border transitions,
+   calm surface layering, and WCAG AA/AAA high-contrast legibility.
+   ========================================================================== */
+
+html.light {
+  color-scheme: light;
+}
+
+html.light body {
+  background-color: #f8f9fb;
+  color: #0f172a;
+}
+
+/* 1. Canvas & Layout Layers (Universal Match for Zinc 950 / 900 / 850 / 800) */
+html.light .bg-zinc-950,
+html.light [class*="bg-zinc-950"] {
+  background-color: #f8f9fb !important;
+  border-color: #e2e8f0 !important;
+}
+
+html.light aside,
+html.light aside.bg-zinc-950,
+html.light [class*="aside"] {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+html.light header,
+html.light header.bg-zinc-950\/90,
+html.light [class*="header"] {
+  background-color: rgba(255, 255, 255, 0.96) !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* 2. Surfaces, Cards & Drawers */
+html.light .bg-zinc-900,
+html.light [class*="bg-zinc-900"] {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+html.light .bg-zinc-850,
+html.light [class*="bg-zinc-850"],
+html.light .bg-zinc-800,
+html.light [class*="bg-zinc-800"] {
+  background-color: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+}
+
+html.light .hover\:bg-zinc-900:hover {
+  background-color: #f8f9fb !important;
+}
+
+html.light .hover\:bg-zinc-800:hover {
+  background-color: #e2e8f0 !important;
+}
+
+html.light .hover\:bg-zinc-700:hover {
+  background-color: #cbd5e1 !important;
+}
+
+/* 3. Softened Border Hierarchy & Dividers */
+html.light .border-zinc-800,
+html.light .border-zinc-850,
+html.light .border-zinc-700,
+html.light [class*="border-zinc-800"],
+html.light [class*="border-zinc-700"],
+html.light [class*="border-zinc-850"] {
+  border-color: #e2e8f0 !important;
+}
+
+html.light .divide-zinc-800 > :not([hidden]) ~ :not([hidden]),
+html.light .divide-zinc-700 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #e2e8f0 !important;
+}
+
+/* 4. High-Contrast Typography Hierarchy */
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6 {
+  color: #0f172a !important;
+}
+
+html.light .text-white,
+html.light .text-zinc-100,
+html.light .text-zinc-200 {
+  color: #0f172a !important;
+}
+
+html.light .text-zinc-300,
+html.light .text-zinc-400 {
+  color: #334155 !important;
+}
+
+html.light .text-zinc-500,
+html.light .text-zinc-600 {
+  color: #475569 !important;
+}
+
+html.light .text-zinc-700 {
+  color: #334155 !important;
+}
+
+/* Specific Banner Gradients in Light Mode */
+html.light .bg-gradient-to-b.from-blue-950\/40,
+html.light [class*="from-blue-950\/40"] {
+  background: linear-gradient(180deg, #eff6ff 0%, #f0fdfa 60%, #f8f9fb 100%) !important;
+  border-color: #e2e8f0 !important;
+}
+
+html.light .bg-gradient-to-r.from-blue-950\/60,
+html.light [class*="from-blue-950\/60"] {
+  background: linear-gradient(135deg, #e0f2fe 0%, #ccfbf1 40%, #f8f9fb 100%) !important;
+  border-color: #bae6fd !important;
+}
+
+/* Light mode heading gradient overrides */
+html.light .text-transparent.bg-clip-text.bg-gradient-to-r {
+  background-image: linear-gradient(to right, #0284c7, #0d9488, #059669) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* 5. CRITICAL: SOLID BUTTONS, CTAs & FLOATING ACCENTS WITH WHITE TEXT */
+html.light .bg-blue-600,
+html.light .bg-blue-500,
+html.light .bg-emerald-600,
+html.light .bg-emerald-500,
+html.light .bg-teal-600,
+html.light .bg-teal-500,
+html.light .bg-cyan-600,
+html.light .bg-cyan-500,
+html.light .bg-indigo-600,
+html.light .bg-indigo-500,
+html.light .bg-red-600,
+html.light .bg-red-500,
+html.light .bg-rose-600,
+html.light .bg-rose-500,
+html.light .bg-purple-600,
+html.light .bg-purple-500,
+html.light .bg-amber-600,
+html.light button.bg-blue-600,
+html.light button.bg-emerald-600,
+html.light button.bg-teal-600,
+html.light button.bg-cyan-600,
+html.light button.bg-indigo-600,
+html.light button.bg-red-600,
+html.light button[class*="bg-gradient-to-r"],
+html.light button[class*="bg-gradient-to-tr"],
+html.light button[class*="bg-gradient-to-br"] {
+  color: #ffffff !important;
+}
+
+html.light .bg-blue-600 *,
+html.light .bg-blue-500 *,
+html.light .bg-emerald-600 *,
+html.light .bg-emerald-500 *,
+html.light .bg-teal-600 *,
+html.light .bg-teal-500 *,
+html.light .bg-cyan-600 *,
+html.light .bg-cyan-500 *,
+html.light .bg-indigo-600 *,
+html.light .bg-indigo-500 *,
+html.light .bg-red-600 *,
+html.light .bg-red-500 *,
+html.light .bg-rose-600 *,
+html.light .bg-rose-500 *,
+html.light .bg-purple-600 *,
+html.light .bg-purple-500 *,
+html.light .bg-amber-600 *,
+html.light button.bg-blue-600 *,
+html.light button.bg-emerald-600 *,
+html.light button.bg-teal-600 *,
+html.light button.bg-cyan-600 *,
+html.light button.bg-indigo-600 *,
+html.light button.bg-red-600 *,
+html.light button[class*="bg-gradient-to-r"] *,
+html.light button[class*="bg-gradient-to-tr"] *,
+html.light button[class*="bg-gradient-to-br"] * {
+  color: #ffffff !important;
+}
+
+/* Amber button with dark text */
+html.light .bg-amber-500,
+html.light .bg-amber-400 {
+  background-color: #f59e0b !important;
+  color: #0f172a !important;
+}
+html.light .bg-amber-500 *,
+html.light .bg-amber-400 * {
+  color: #0f172a !important;
+}
+
+/* 6. CRITICAL: PRESERVE-DARK FOR LIVE BROADCAST VIEWPORTS, MONITORS & OVERLAYS */
+html.light .preserve-dark,
+html.light [data-theme-preserve="dark"],
+html.light .bg-black,
+html.light [class*="bg-black\/"] {
+  background-color: #09090b;
+  color: #f4f4f5 !important;
+}
+
+html.light .preserve-dark h1,
+html.light .preserve-dark h2,
+html.light .preserve-dark h3,
+html.light .preserve-dark h4,
+html.light .preserve-dark h5,
+html.light .preserve-dark h6,
+html.light [data-theme-preserve="dark"] h1,
+html.light [data-theme-preserve="dark"] h2,
+html.light [data-theme-preserve="dark"] h3,
+html.light [data-theme-preserve="dark"] h4,
+html.light [data-theme-preserve="dark"] h5,
+html.light [data-theme-preserve="dark"] h6 {
+  color: #ffffff !important;
+}
+
+html.light .preserve-dark .text-white,
+html.light [data-theme-preserve="dark"] .text-white,
+html.light .bg-black .text-white,
+html.light [class*="bg-black\/"] .text-white,
+html.light [class*="bg-black\/"] span.text-white {
+  color: #ffffff !important;
+}
+
+html.light .preserve-dark .text-zinc-100,
+html.light [data-theme-preserve="dark"] .text-zinc-100,
+html.light [class*="bg-black\/"] .text-zinc-100 {
+  color: #f4f4f5 !important;
+}
+
+html.light .preserve-dark .text-zinc-200,
+html.light [data-theme-preserve="dark"] .text-zinc-200,
+html.light [class*="bg-black\/"] .text-zinc-200 {
+  color: #e4e4e7 !important;
+}
+
+html.light .preserve-dark .text-zinc-300,
+html.light [data-theme-preserve="dark"] .text-zinc-300,
+html.light [class*="bg-black\/"] .text-zinc-300 {
+  color: #d4d4d8 !important;
+}
+
+html.light .preserve-dark .text-zinc-400,
+html.light [data-theme-preserve="dark"] .text-zinc-400,
+html.light [class*="bg-black\/"] .text-zinc-400 {
+  color: #a1a1aa !important;
+}
+
+html.light .preserve-dark .text-zinc-500,
+html.light [data-theme-preserve="dark"] .text-zinc-500,
+html.light [class*="bg-black\/"] .text-zinc-500 {
+  color: #71717a !important;
+}
+
+html.light .preserve-dark [class*="bg-zinc-950"],
+html.light .preserve-dark [class*="bg-zinc-900"],
+html.light .preserve-dark [class*="bg-zinc-800"],
+html.light [data-theme-preserve="dark"] [class*="bg-zinc-950"],
+html.light [data-theme-preserve="dark"] [class*="bg-zinc-900"],
+html.light [data-theme-preserve="dark"] [class*="bg-zinc-800"] {
+  background-color: rgba(15, 23, 42, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+html.light .preserve-dark [class*="border-zinc-"],
+html.light [data-theme-preserve="dark"] [class*="border-zinc-"] {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* 7. REFINED PASTEL STATUS BADGES IN LIGHT MODE */
+html.light .bg-emerald-500\/10,
+html.light .bg-emerald-500\/20,
+html.light .bg-emerald-500\/30 {
+  background-color: #ecfdf5 !important;
+  color: #065f46 !important;
+  border-color: #d1fae5 !important;
+}
+html.light .text-emerald-400,
+html.light .text-emerald-500 {
+  color: #059669 !important;
+}
+
+html.light .bg-indigo-500\/10,
+html.light .bg-indigo-500\/20,
+html.light .bg-indigo-500\/30 {
+  background-color: #eef2ff !important;
+  color: #3730a3 !important;
+  border-color: #e0e7ff !important;
+}
+html.light .text-indigo-400,
+html.light .text-indigo-500 {
+  color: #4338ca !important;
+}
+
+html.light .bg-blue-500\/10,
+html.light .bg-blue-500\/20,
+html.light .bg-blue-500\/30 {
+  background-color: #eff6ff !important;
+  color: #1e40af !important;
+  border-color: #dbeafe !important;
+}
+html.light .text-blue-400,
+html.light .text-blue-500 {
+  color: #0284c7 !important;
+}
+
+html.light .bg-purple-500\/10,
+html.light .bg-purple-500\/20,
+html.light .bg-purple-500\/30 {
+  background-color: #faf5ff !important;
+  color: #581c87 !important;
+  border-color: #f3e8ff !important;
+}
+html.light .text-purple-400,
+html.light .text-purple-500 {
+  color: #7c3aed !important;
+}
+
+html.light .bg-red-500\/10,
+html.light .bg-red-500\/20,
+html.light .bg-red-500\/30 {
+  background-color: #fef2f2 !important;
+  color: #991b1b !important;
+  border-color: #fee2e2 !important;
+}
+html.light .text-red-400,
+html.light .text-red-500 {
+  color: #dc2626 !important;
+}
+
+html.light .bg-rose-500\/10,
+html.light .bg-rose-500\/20 {
+  background-color: #fff1f2 !important;
+  color: #9f1239 !important;
+  border-color: #ffe4e6 !important;
+}
+html.light .text-rose-400,
+html.light .text-rose-500 {
+  color: #e11d48 !important;
+}
+
+html.light .bg-amber-500\/10,
+html.light .bg-amber-500\/20,
+html.light .bg-amber-500\/30 {
+  background-color: #fffbeb !important;
+  color: #92400e !important;
+  border-color: #fef3c7 !important;
+}
+html.light .text-amber-400,
+html.light .text-amber-500 {
+  color: #d97706 !important;
+}
+
+html.light .bg-cyan-500\/10,
+html.light .bg-cyan-500\/20 {
+  background-color: #ecfeff !important;
+  color: #155e75 !important;
+  border-color: #cffafe !important;
+}
+html.light .text-cyan-400,
+html.light .text-cyan-500 {
+  color: #0891b2 !important;
+}
+
+html.light .bg-teal-500\/10,
+html.light .bg-teal-500\/20 {
+  background-color: #f0fdfa !important;
+  color: #115e59 !important;
+  border-color: #ccfbf1 !important;
+}
+html.light .text-teal-400,
+html.light .text-teal-500 {
+  color: #0d9488 !important;
+}
+
+/* 8. FORM CONTROLS, SEARCH BARS & INPUTS */
+html.light input,
+html.light select,
+html.light textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #e2e6ea !important;
+}
+
+html.light input:focus,
+html.light select:focus,
+html.light textarea:focus {
+  border-color: #0284c7 !important;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15) !important;
+  outline: none !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* 9. RECHARTS DATA VISUALIZATION */
+html.light .recharts-cartesian-grid line {
+  stroke: #f1f3f7 !important;
+}
+
+html.light .recharts-default-tooltip,
+html.light .recharts-tooltip-wrapper > div {
+  background-color: #ffffff !important;
+  border: 1px solid #e5e8ec !important;
+  color: #0f172a !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* 10. SCROLLBARS */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(9, 9, 11, 0.6);
+}
+
+html.light ::-webkit-scrollbar-track {
+  background: rgba(241, 243, 247, 0.9);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.mask-gradient-bottom {
+  mask-image: linear-gradient(to top, black 85%, transparent 100%);
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateY(-120px) scale(1.2) rotate(-8deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-240px) scale(1.4) rotate(8deg);
+  }
+}
+
+.animate-float-up {
+  animation: floatUp 2.2s ease-out forwards;
+}

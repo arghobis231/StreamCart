@@ -1,0 +1,11 @@
+{
+  "name": "StreamCart",
+  "description": "StreamCart Director Suite & Live Shopping Network — Turn every livestream into an interactive storefront with consumer stream discovery, professional studio director tools, multi-camera scenes, live product drops, and 1-click in-stream checkout.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
