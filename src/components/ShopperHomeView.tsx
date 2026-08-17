@@ -107,7 +107,7 @@ export const ShopperHomeView: React.FC<ShopperHomeViewProps> = ({
   return (
     <div className="flex-1 flex flex-col bg-zinc-950 text-white overflow-y-auto min-h-0">
       {/* 1. Hero Banner */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-blue-950/40 via-zinc-900/60 to-zinc-950 border-b border-zinc-800/80 px-6 lg:px-12 py-10 lg:py-14">
+      <section className="relative overflow-hidden bg-gradient-to-b from-blue-950/40 via-zinc-900/60 to-zinc-950 border-b border-zinc-800/80 px-4 sm:px-6 lg:px-12 py-8 sm:py-10 lg:py-14">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-600/15 via-teal-500/5 to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Hero Copy */}
@@ -254,7 +254,7 @@ export const ShopperHomeView: React.FC<ShopperHomeViewProps> = ({
       </section>
 
       {/* 2. 🔴 LIVE NOW Directory Section */}
-      <section className="px-6 lg:px-12 py-8 border-b border-zinc-800/80">
+      <section className="px-4 sm:px-6 lg:px-12 py-6 sm:py-8 border-b border-zinc-800/80">
         <div className="max-w-7xl mx-auto space-y-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
@@ -383,7 +383,7 @@ export const ShopperHomeView: React.FC<ShopperHomeViewProps> = ({
       </section>
 
       {/* 3. Recommended For You (Curated Live Drops) */}
-      <section className="px-6 lg:px-12 py-8 border-b border-zinc-800/80 bg-zinc-950">
+      <section className="px-4 sm:px-6 lg:px-12 py-6 sm:py-8 border-b border-zinc-800/80 bg-zinc-950">
         <div className="max-w-7xl mx-auto space-y-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -600,7 +600,7 @@ export const ShopperHomeView: React.FC<ShopperHomeViewProps> = ({
       </section>
 
       {/* 5. Creators You May Like (Following Hub) */}
-      <section className="px-6 lg:px-12 py-8 border-b border-zinc-800/80 bg-zinc-950">
+      <section className="px-4 sm:px-6 lg:px-12 py-6 sm:py-8 border-b border-zinc-800/80 bg-zinc-950">
         <div className="max-w-7xl mx-auto space-y-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">

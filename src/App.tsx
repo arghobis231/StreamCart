@@ -34,6 +34,7 @@ import {
 // Core Navigation & Layout Components
 import { Sidebar } from './components/Sidebar';
 import { TopHeader } from './components/TopHeader';
+import { MobileBottomNav } from './components/MobileBottomNav';
 
 // Creator Studio Views
 import { DashboardView } from './components/DashboardView';
@@ -171,6 +172,7 @@ export default function App() {
   // UI Modals & Drawers
   const [spotlightProduct, setSpotlightProduct] = useState<ProductItem | null>(null);
   const [isNotificationDrawerOpen, setIsNotificationDrawerOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Sync theme to root DOM
   useEffect(() => {
@@ -595,6 +597,8 @@ export default function App() {
         onUploadAvatar={handleUploadAvatar}
         theme={theme}
         onToggleTheme={setTheme}
+        isMobileOpen={isMobileMenuOpen}
+        onCloseMobile={() => setIsMobileMenuOpen(false)}
       />
 
       {/* 2. Main Content Container */}
@@ -617,10 +621,11 @@ export default function App() {
           userProfile={userProfile}
           theme={theme}
           onToggleTheme={setTheme}
+          onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
         />
 
         {/* Dynamic Screen View */}
-        <main className="flex-1 flex flex-col min-h-0 overflow-hidden">
+        <main className="flex-1 flex flex-col min-h-0 overflow-hidden pb-14 lg:pb-0">
           {/* Shopper Views */}
           {currentScreen === 'home' && (
             <ShopperHomeView
@@ -808,7 +813,18 @@ export default function App() {
         </main>
       </div>
 
-      {/* 3. Product Spotlight Modal */}
+      {/* 3. Mobile Bottom Navigation Bar (visible on < lg viewports) */}
+      <MobileBottomNav
+        appMode={appMode}
+        currentScreen={currentScreen}
+        onNavigate={setCurrentScreen}
+        cartItemCount={cartUnitsCount}
+        wishlistCount={wishlist.length}
+        unreadOrdersCount={orders.length}
+        broadcastStatus={broadcastStatus}
+      />
+
+      {/* 4. Product Spotlight Modal */}
       {spotlightProduct && (
         <ProductSpotlightModal
           product={spotlightProduct}

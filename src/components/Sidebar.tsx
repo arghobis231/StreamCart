@@ -25,6 +25,7 @@ import {
   User,
   Tv,
   Layers,
+  X,
 } from 'lucide-react';
 import { ScreenId, BroadcastStatus, UserProfile, AppMode } from '../types';
 
@@ -44,6 +45,8 @@ interface SidebarProps {
   onUploadAvatar?: (file: File) => void;
   theme?: 'dark' | 'light';
   onToggleTheme?: (theme: 'dark' | 'light') => void;
+  isMobileOpen?: boolean;
+  onCloseMobile?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -62,6 +65,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onUploadAvatar,
   theme = 'dark',
   onToggleTheme,
+  isMobileOpen = false,
+  onCloseMobile,
 }) => {
   const viewerCount = liveViewerCount ?? ccv ?? 0;
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -76,6 +81,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
     const file = e.target.files?.[0];
     if (file && onUploadAvatar) {
       onUploadAvatar(file);
+    }
+  };
+
+  const handleNavClick = (screen: ScreenId) => {
+    onNavigate(screen);
+    if (onCloseMobile) {
+      onCloseMobile();
+    }
+  };
+
+  const handleModeChange = (mode: AppMode) => {
+    onSwitchMode(mode);
+    if (onCloseMobile) {
+      onCloseMobile();
     }
   };
 
@@ -181,10 +200,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
     },
   ];
 
-  return (
-    <aside className="w-64 bg-zinc-950 border-r border-zinc-800/80 flex flex-col shrink-0 select-none z-30">
+  const renderSidebarBody = (isMobile: boolean = false) => (
+    <div className="flex flex-col h-full overflow-hidden select-none bg-zinc-950 text-white">
       {/* Brand Header */}
-      <div className="p-4 border-b border-zinc-800/80 flex items-center justify-between">
+      <div className="p-4 border-b border-zinc-800/80 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">
           {/* DS Monogram Logo */}
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 via-teal-500 to-emerald-500 p-0.5 shadow-lg shadow-blue-500/20 flex items-center justify-center">
@@ -204,10 +223,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <p className="text-[11px] text-zinc-400 font-normal">Director Suite</p>
           </div>
         </div>
+
+        {isMobile && onCloseMobile && (
+          <button
+            onClick={onCloseMobile}
+            className="p-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
+            title="Close Menu"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        )}
       </div>
 
       {/* 2-Sided Mode Switcher Segmented Control */}
-      <div className="p-3 bg-zinc-900/40 border-b border-zinc-800/80">
+      <div className="p-3 bg-zinc-900/40 border-b border-zinc-800/80 shrink-0">
         <div className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-2 px-1 flex items-center justify-between">
           <span>Active Interface</span>
           <span className="text-[10px] text-teal-400 font-bold">
@@ -217,7 +246,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
         <div className="grid grid-cols-2 p-1 rounded-xl bg-zinc-950 border border-zinc-800/90 gap-1">
           <button
-            onClick={() => onSwitchMode('shopper')}
+            onClick={() => handleModeChange('shopper')}
             className={`flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
               appMode === 'shopper'
                 ? 'bg-gradient-to-r from-teal-600 to-emerald-600 text-white shadow-md'
@@ -229,7 +258,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </button>
 
           <button
-            onClick={() => onSwitchMode('creator')}
+            onClick={() => handleModeChange('creator')}
             className={`flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
               appMode === 'creator'
                 ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
@@ -259,7 +288,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           return (
             <button
               key={item.id}
-              onClick={() => onNavigate(item.id)}
+              onClick={() => handleNavClick(item.id)}
               className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all group cursor-pointer ${
                 isActive
                   ? item.isLiveHero
@@ -310,7 +339,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
 
           <button
-            onClick={() => onNavigate('viewer')}
+            onClick={() => handleNavClick('viewer')}
             className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               currentScreen === 'viewer'
                 ? 'bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 text-white shadow-lg shadow-red-600/30'
@@ -342,7 +371,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       />
 
       {/* Profile & Mode Toggle Footer */}
-      <div className="p-3 border-t border-zinc-800/80 bg-zinc-900/30">
+      <div className="p-3 border-t border-zinc-800/80 bg-zinc-900/30 shrink-0">
         <div className="flex items-center gap-3 p-2 rounded-xl bg-zinc-900/80 border border-zinc-800/80 group">
           {/* Avatar with quick Upload trigger */}
           <div
@@ -363,7 +392,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
           <div
             className="flex-1 min-w-0 cursor-pointer text-left"
-            onClick={() => onNavigate(appMode === 'shopper' ? 'profile' : 'settings')}
+            onClick={() => handleNavClick(appMode === 'shopper' ? 'profile' : 'settings')}
             title="View Account Profile"
           >
             <div className="flex items-center gap-1">
@@ -390,6 +419,30 @@ export const Sidebar: React.FC<SidebarProps> = ({
           )}
         </div>
       </div>
-    </aside>
+    </div>
+  );
+
+  return (
+    <>
+      {/* 1. Desktop Persistent Sidebar: ONLY rendered on lg (1024px) and above */}
+      <aside className="hidden lg:flex w-64 bg-zinc-950 border-r border-zinc-800/80 flex-col shrink-0 select-none z-30 h-full">
+        {renderSidebarBody(false)}
+      </aside>
+
+      {/* 2. Mobile / Tablet Drawer: Rendered when isMobileOpen is true */}
+      {isMobileOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden flex">
+          {/* Backdrop overlay */}
+          <div
+            className="fixed inset-0 bg-black/70 backdrop-blur-xs transition-opacity animate-in fade-in duration-200"
+            onClick={onCloseMobile}
+          />
+          {/* Slide-over Drawer */}
+          <div className="relative w-72 sm:w-80 max-w-[85vw] bg-zinc-950 border-r border-zinc-800 shadow-2xl h-full flex flex-col z-10 animate-in slide-in-from-left duration-200">
+            {renderSidebarBody(true)}
+          </div>
+        </div>
+      )}
+    </>
   );
 };

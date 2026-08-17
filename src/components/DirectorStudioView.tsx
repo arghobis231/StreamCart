@@ -101,6 +101,7 @@ export const DirectorStudioView: React.FC<DirectorStudioViewProps> = ({
   const [activeScene, setActiveScene] = useState<SceneId>('main');
   const [leftPanelTab, setLeftPanelTab] = useState<'scenes' | 'banners' | 'hardware'>('banners');
   const [activeTab, setActiveTab] = useState<'chat' | 'questions' | 'orders' | 'telemetry'>('chat');
+  const [mobileStudioSection, setMobileStudioSection] = useState<'monitor' | 'controls' | 'feed'>('monitor');
   const [inputText, setInputText] = useState('');
   const [micMuted, setMicMuted] = useState(false);
   const [cameraOff, setCameraOff] = useState(false);
@@ -419,10 +420,47 @@ export const DirectorStudioView: React.FC<DirectorStudioViewProps> = ({
         </div>
       </div>
 
+      {/* Mobile / Tablet Studio Section Selector (visible only < xl viewports) */}
+      <div className="xl:hidden flex items-center bg-zinc-950 border-b border-zinc-800 p-1.5 gap-1 shrink-0 z-10">
+        <button
+          onClick={() => setMobileStudioSection('monitor')}
+          className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+            mobileStudioSection === 'monitor'
+              ? 'bg-blue-600 text-white shadow-md'
+              : 'text-zinc-400 hover:text-zinc-200 bg-zinc-900'
+          }`}
+        >
+          <Monitor className="w-3.5 h-3.5" />
+          <span>Monitor</span>
+        </button>
+        <button
+          onClick={() => setMobileStudioSection('controls')}
+          className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+            mobileStudioSection === 'controls'
+              ? 'bg-blue-600 text-white shadow-md'
+              : 'text-zinc-400 hover:text-zinc-200 bg-zinc-900'
+          }`}
+        >
+          <Sliders className="w-3.5 h-3.5" />
+          <span>Controls & Banners</span>
+        </button>
+        <button
+          onClick={() => setMobileStudioSection('feed')}
+          className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+            mobileStudioSection === 'feed'
+              ? 'bg-blue-600 text-white shadow-md'
+              : 'text-zinc-400 hover:text-zinc-200 bg-zinc-900'
+          }`}
+        >
+          <MessageSquare className="w-3.5 h-3.5" />
+          <span>Chat & Orders ({orders.length})</span>
+        </button>
+      </div>
+
       {/* 3. MAIN STUDIO WORKSPACE (3-Column Layout: Controls, Monitor, Chat/Commerce) */}
       <div className="flex-1 flex overflow-hidden min-h-0">
         {/* Left Column: Director Production Controls, Scenes & Dynamic Banners (Section 11) */}
-        <div className="w-80 lg:w-96 bg-zinc-900/95 border-r border-zinc-800 flex flex-col shrink-0 overflow-hidden">
+        <div className={`w-full xl:w-80 2xl:w-96 bg-zinc-900/95 border-r border-zinc-800 flex-col shrink-0 overflow-hidden ${mobileStudioSection === 'controls' ? 'flex' : 'hidden xl:flex'}`}>
           {/* Left Column Tab Navigation */}
           <div className="flex items-center border-b border-zinc-800 bg-zinc-950 p-1.5 gap-1 shrink-0">
             <button
@@ -602,7 +640,7 @@ export const DirectorStudioView: React.FC<DirectorStudioViewProps> = ({
         </div>
 
         {/* Center: Live Program Video Monitor (Section 10) */}
-        <div className="flex-1 flex flex-col bg-black overflow-hidden relative preserve-dark" data-theme-preserve="dark">
+        <div className={`flex-1 flex-col bg-black overflow-hidden relative preserve-dark ${mobileStudioSection === 'monitor' ? 'flex' : 'hidden xl:flex'}`} data-theme-preserve="dark">
           {/* Main 16:9 Video Canvas with Drag-and-Drop Dynamic Banner Support */}
           <div
             ref={videoMonitorRef}
@@ -744,7 +782,7 @@ export const DirectorStudioView: React.FC<DirectorStudioViewProps> = ({
         </div>
 
         {/* Right Column: Live Chat, Questions & Live Orders Hub (Sections 12-14) */}
-        <div className="w-80 lg:w-96 bg-zinc-900 border-l border-zinc-800 flex flex-col shrink-0 overflow-hidden">
+        <div className={`w-full xl:w-80 2xl:w-96 bg-zinc-900 border-l border-zinc-800 flex-col shrink-0 overflow-hidden ${mobileStudioSection === 'feed' ? 'flex' : 'hidden xl:flex'}`}>
           {/* Navigation Tabs for Right Panel */}
           <div className="flex items-center border-b border-zinc-800 bg-zinc-950/80 p-1">
             <button
